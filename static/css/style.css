@@ -1,0 +1,127 @@
+div.bar {
+	border-radius: 10px 10px 0px 0px / 10px 10px 0px 0px;
+	background-color: #48BDD5;
+	width: 500px;
+	height: 40px;
+	text-align:center;
+	font-size: 20px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+div.input-box {
+	width: 500px;
+	height: 60px;
+}
+
+/* balloon common */
+div.balloon-wrapper {
+		    border-left: solid 1px #48BDD5;
+		    border-right: solid 1px #48BDD5;
+		    border-top: solid 1px #48BDD5;
+		    width: 500px;
+		    background-color: #f5f5f5;
+}
+div.balloon-wrapper::after {
+			   clear: both;
+			   content: "";
+			   display: block;
+			   line-height: 0;
+}
+.balloon-left {
+		position: relative;
+		z-index: 1;
+		width: 330px;
+		margin: 15px auto;
+		padding: 13px;
+		background-color: #888888;
+		border-width: 3px;
+		border-style: solid;
+		border-radius: 10px;
+		color:white;
+}
+
+.balloon-right {
+		position: relative;
+		z-index: 1;
+		width: 330px;
+		margin: 15px auto;
+		padding: 13px;
+		background-color: #fff;
+		border-width: 3px;
+		border-style: solid;
+		border-radius: 10px;
+		color:black;
+}
+
+.balloon-left::before,
+.balloon-right::before {
+			content: "";
+			display: block;
+			position: absolute;
+			z-index: 10;
+			top: 10px;
+			width:  0;
+			height: 0;
+			border: 15px solid transparent;
+}
+
+.balloon-left::after,
+.balloon-right::after {
+		       content: "";
+		       display: block;
+		       position: absolute;
+		       z-index: 100;
+		       top: 10px;
+		       width:  0;
+		       height: 0;
+		       border: 15px solid transparent;
+}
+
+/* balloon left */
+.balloon-left {
+/*	       float: left;*/
+	       float: right;
+	       margin-right: 15px;
+	       border-color: #888888;
+}
+.balloon-left::before {
+		       left: -31px;
+		       border-right: 15px solid #888888;
+}
+.balloon-left::after {
+		      left: -26px;
+		      border-right: 15px solid #888888;
+}
+
+/* balloon right */
+.balloon-right {
+		float: left;
+		margin-left: 15px;
+		border-color: #fff;
+}
+.balloon-right::before {
+			right: -31px;
+			border-left: 15px solid #fff;
+}
+.balloon-right::after {
+		       right: -26px;
+		       border-left: 15px solid #fff;
+}
+
+.msg-container {
+    word-wrap:break-word;
+}
+
+
+img {
+  width: 75px;
+  border-radius: 75px;
+  -webkit-border-radius: 75px;
+  -moz-border-radius: 75px;
+  background-color:white;
+  box-shadow: 0px 0px 0px 3px #C0C0C0;
+  -moz-box-shadow: 0px 0px 0px 3px #C0C0C0;
+  -webkit-box-shadow: 0px 0px 0px 3px #C0C0C0;
+  margin-top: 5px;
+}

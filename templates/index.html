@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ static_url('css/jquery.ui.chatbox.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ static_url('css/style.css') }}" />
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+    <script src="{{ static_url('js/jquery.ui.chatbox.js') }}"></script>
+
+    <script>
+        var socket = new WebSocket('ws://' + location.host + '/chat');
+
+        function sendAction(img_path, msg) {
+
+            var message = {
+                img_path: img_path,
+                message: msg
+            };
+
+            socket.send(JSON.stringify(message));
+        }
+
+        socket.onopen = function(data) {
+        }
+
+        socket.onclose = function() {
+        }
+
+        socket.onmessage = function(event) {
+            var data = JSON.parse(event.data);
+            if ('messages' in data) {
+                var messages = data.messages;
+                for (var i=0; i<messages.length; i++) {
+                    $("#chat_div").chatbox("option", "boxManager").addMsg(messages[i].img_path, messages[i].message, false);
+                }
+            } else {
+                $("#chat_div").chatbox("option", "boxManager").addMsg(data.img_path, data.message, false);
+            }
+        }
+
+        $(document).ready(function() {
+            $("#chat_div").chatbox(
+                {id : "chat_div",
+                 title : "Chat De Tornado",
+                 user : "hoge",
+                 offset: 0,
+                 width: 500,
+                 messageSent: function(id, user, msg){
+                     var img_path = $('#face').attr('src');
+                     this.boxManager.addMsg(img_path, msg, true);
+                     sendAction(img_path, msg);
+            }});
+        });
+    </script>
+</head>
+<body>
+    <img src="{{ img_path }}" id="face" style="visibility:hidden">
+    <div id="chat_div" class="chat"></div>
+</body>
+</html>
